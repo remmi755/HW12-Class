@@ -1,44 +1,56 @@
-let timeShow = document.getElementById('clock');
-
-function createFullFormat (){
-    let now = new Date()
-
-    let hh =  now.getHours();
-    if (hh < 10) hh = '0' + hh;
-
-    let mm = now.getMinutes();
-    if (mm < 10) mm = '0' + mm;
-
-    let ss = now.getSeconds()
-
-    if (ss < 10) ss = '0' + ss;
-    return  `${hh}:${mm}:${ss}`
-}
-
-function creatShotFormat (){
-    let now = new Date()
-
-    let hh =  now.getHours();
-    if (hh < 10) hh = '0' + hh;
-
-    let mm = now.getMinutes();
-    if (mm < 10) mm = '0' + mm;
-
-    return  `${hh}:${mm}`
-}
-timeShow.classList.add('full')
-
-setInterval(function (){
-    if (timeShow.classList.contains('full')) {
-        timeShow.innerHTML = createFullFormat()
-    } else {
-        timeShow.innerHTML = creatShotFormat()
+class Watch {
+    constructor() {
+        this.newWatch = document.createElement("div");
+        this.startWatch()
+        this.addElement()
     }
-},250)
 
-timeShow.addEventListener('click',function () {
+    addElement() {
+        this.newWatch.innerHTML = this.createFullFormat()
+        document.body.prepend(this.newWatch);
+        this.newWatch.className = 'full'
+        this.newWatch.addEventListener('click', this.toggles.bind(this))
+    }
 
-    timeShow.classList.toggle('full')
+    format() {
+        this.hh = new Date().getHours();
+        if (this.hh < 10) this.hh = '0' + this.hh;
+        this.mm = new Date().getMinutes();
+        if (this.mm < 10) this.mm = '0' + this.mm;
+        this.ss = new Date().getSeconds();
+        if (this.ss < 10) this.ss = '0' + this.ss;
+    }
 
-})
+    createFullFormat() {
+        this.format()
+        return  `${this.hh}:${this.mm}:${this.ss}`
+    }
+
+    creatShotFormat() {
+        this.format()
+        return   `${this.hh}:${this.mm}`
+    }
+
+    render() {
+        if (this.newWatch.classList.contains('full')) {
+            this.newWatch.innerHTML = this.createFullFormat()
+        } else {
+            this.newWatch.innerHTML = this.creatShotFormat()
+        }
+    }
+
+    startWatch() {
+        setInterval(() => this.render(), 250);
+    }
+
+    toggles() {
+        this.newWatch.classList.toggle('full')
+    }
+}
+
+let watch = new Watch()
+let watch2 = new Watch()
+let watch3 = new Watch()
+let watch4 = new Watch()
+let watch5 = new Watch()
 

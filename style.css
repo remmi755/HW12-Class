@@ -3,7 +3,7 @@ body {
 }
 
 
-#clock {
+div {
     padding: 15px;
     background: #000;
     color: #0f0;
@@ -13,4 +13,5 @@ body {
     width: 150px;
     text-align: center;
     font-size: 36px;
+    margin: 5px;
 }
